@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Счет №{{invoice_id}}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        body {
+            font-family: 'DejaVu Sans', 'Roboto', Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 32px;
+            margin: 0;
+        }
+        
+        .invoice-number {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .info-block {
+            width: 48%;
+        }
+        
+        .info-block h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .info-line {
+            margin-bottom: 8px;
+        }
+        
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        
+        .items-table th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .items-table th:nth-child(2) {
+            text-align: center;
+            width: 100px;
+        }
+        
+        .items-table th:nth-child(3),
+        .items-table th:nth-child(4) {
+            text-align: right;
+            width: 120px;
+        }
+        
+        .items-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .items-table td:nth-child(2) {
+            text-align: center;
+        }
+        
+        .items-table td:nth-child(3),
+        .items-table td:nth-child(4) {
+            text-align: right;
+        }
+        
+        .items-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .totals-section {
+            margin-top: 30px;
+            text-align: right;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+        
+        .total-label {
+            font-weight: bold;
+            margin-right: 20px;
+            min-width: 150px;
+            text-align: right;
+        }
+        
+        .total-value {
+            min-width: 120px;
+            text-align: right;
+        }
+        
+        .grand-total {
+            border-top: 2px solid #2c3e50;
+            padding-top: 10px;
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #7f8c8d;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <h1>СЧЕТ</h1>
+            <div class="invoice-number">№ {{invoice_id}}</div>
+            <div class="invoice-number">от {{date}}</div>
+        </div>
+        
+        <div class="info-section">
+            <div class="info-block">
+                <h3>Информация о клиенте</h3>
+                <div class="info-line">
+                    <span class="label">ФИО:</span> {{customer_name}}
+                </div>
+                <div class="info-line">
+                    <span class="label">Email:</span> {{customer_email}}
+                </div>
+                <div class="info-line">
+                    <span class="label">Адрес:</span> {{customer_address}}
+                </div>
+            </div>
+        </div>
+        
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Наименование</th>
+                    <th>Количество</th>
+                    <th>Цена за ед.</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{item_name}}</td>
+                    <td>{{quantity}}</td>
+                    <td>{{unit_price}} ₽</td>
+                    <td>{{total}} ₽</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="totals-section">
+            <div class="total-row">
+                <div class="total-label">Подытог:</div>
+                <div class="total-value">{{total}} ₽</div>
+            </div>
+            <div class="total-row">
+                <div class="total-label">НДС (18%):</div>
+                <div class="total-value">{{tax}} ₽</div>
+            </div>
+            <div class="total-row grand-total">
+                <div class="total-label">ИТОГО К ОПЛАТЕ:</div>
+                <div class="total-value">{{grand_total}} ₽</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Спасибо за ваш заказ!</p>
+            <p>По всем вопросам обращайтесь по email: support@example.com</p>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,42 @@
+[
+  {
+    "invoice_id": "INV-101",
+    "date": "2025-01-20",
+    "customer_name": "Анна Павлова",
+    "customer_email": "anna@example.com",
+    "customer_address": "Москва, ул. Тверская, д. 7",
+    "item_name": "Принтер HP LaserJet",
+    "quantity": 1,
+    "unit_price": 18000,
+    "total": 18000,
+    "tax": 3240,
+    "grand_total": 21240
+  },
+  {
+    "invoice_id": "INV-102",
+    "date": "2025-01-21",
+    "customer_name": "Сергей Николаев",
+    "customer_email": "sergey@example.com",
+    "customer_address": "Санкт-Петербург, ул. Рубинштейна, д. 3",
+    "item_name": "Внешний жесткий диск 2TB",
+    "quantity": 2,
+    "unit_price": 5500,
+    "total": 11000,
+    "tax": 1980,
+    "grand_total": 12980
+  },
+  {
+    "invoice_id": "INV-103",
+    "date": "2025-01-22",
+    "customer_name": "Елена Федорова",
+    "customer_email": "elena@example.com",
+    "customer_address": "Краснодар, ул. Красная, д. 120",
+    "item_name": "Веб-камера Logitech",
+    "quantity": 1,
+    "unit_price": 4500,
+    "total": 4500,
+    "tax": 810,
+    "grand_total": 5310
+  }
+]
+

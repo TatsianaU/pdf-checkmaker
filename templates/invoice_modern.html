@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Счет №{{invoice_id}}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm;
+        }
+        
+        body {
+            font-family: 'DejaVu Sans', 'Roboto', Arial, sans-serif;
+            color: #2d3436;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .invoice-wrapper {
+            background: white;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .invoice-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .customer-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .customer-info h2 {
+            margin: 0 0 15px 0;
+            color: #667eea;
+            font-size: 18px;
+        }
+        
+        .info-row {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .info-label {
+            display: inline-block;
+            width: 100px;
+            font-weight: 600;
+            color: #636e72;
+        }
+        
+        .items-section {
+            margin: 30px 0;
+        }
+        
+        .items-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .items-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .items-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        
+        .items-table th:nth-child(2) {
+            text-align: center;
+            width: 100px;
+        }
+        
+        .items-table th:nth-child(3),
+        .items-table th:nth-child(4) {
+            text-align: right;
+            width: 120px;
+        }
+        
+        .items-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e1e8ed;
+            background: white;
+        }
+        
+        .items-table td:nth-child(2) {
+            text-align: center;
+        }
+        
+        .items-table td:nth-child(3),
+        .items-table td:nth-child(4) {
+            text-align: right;
+        }
+        
+        .items-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .items-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .totals-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            float: right;
+            width: 350px;
+        }
+        
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: 15px;
+        }
+        
+        .total-line.subtotal {
+            color: #636e72;
+        }
+        
+        .total-line.tax {
+            color: #636e72;
+            border-bottom: 1px solid #dfe6e9;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .total-line.grand {
+            font-size: 22px;
+            font-weight: bold;
+            color: #667eea;
+            padding-top: 15px;
+            border-top: 2px solid #667eea;
+        }
+        
+        .footer {
+            clear: both;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #e1e8ed;
+            text-align: center;
+            color: #636e72;
+        }
+        
+        .footer h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .currency {
+            color: #b2bec3;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-wrapper">
+        <div class="header">
+            <h1>INVOICE</h1>
+            <div class="invoice-meta">
+                <div>Номер счета: <strong>{{invoice_id}}</strong></div>
+                <div>Дата: <strong>{{date}}</strong></div>
+            </div>
+        </div>
+        
+        <div class="customer-info">
+            <h2>Информация о покупателе</h2>
+            <div class="info-row">
+                <span class="info-label">Клиент:</span>
+                <span>{{customer_name}}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Email:</span>
+                <span>{{customer_email}}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Адрес:</span>
+                <span>{{customer_address}}</span>
+            </div>
+        </div>
+        
+        <div class="items-section">
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>Товар / Услуга</th>
+                        <th>Кол-во</th>
+                        <th>Цена</th>
+                        <th>Сумма</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>{{item_name}}</strong></td>
+                        <td>{{quantity}}</td>
+                        <td>{{unit_price}} <span class="currency">₽</span></td>
+                        <td><strong>{{total}} <span class="currency">₽</span></strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="totals-box">
+            <div class="total-line subtotal">
+                <span>Подытог:</span>
+                <span>{{total}} ₽</span>
+            </div>
+            <div class="total-line tax">
+                <span>НДС (18%):</span>
+                <span>{{tax}} ₽</span>
+            </div>
+            <div class="total-line grand">
+                <span>К ОПЛАТЕ:</span>
+                <span>{{grand_total}} ₽</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3>Благодарим за покупку!</h3>
+            <p>Если у вас есть вопросы по этому счету, пожалуйста, свяжитесь с нами</p>
+            <p style="font-size: 13px; margin-top: 15px;">
+                Email: support@example.com | Телефон: +7 (495) 123-45-67
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+

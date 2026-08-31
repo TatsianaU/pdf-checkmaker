@@ -13,11 +13,5 @@ output/
 .DS_Store
 Thumbs.db
 
-# Docs / reports (не нужны для сдачи)
-README.md
-QUICKSTART.md
-CHANGELOG.md
-ALIGNMENT_FIX.md
-ALIGNMENT_REPORT.txt
-FINAL_REPORT.txt
+
 
